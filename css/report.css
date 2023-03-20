@@ -1,0 +1,23 @@
+/* 
+    Document   : report
+    Created on : Sep 18, 2013, 8:55:03 AM
+    Author     : nugraha
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+body {
+    margin: 0;
+    font-family:  calibri,tahoma,arial;
+}
+
+.report-toolbar {
+    background: #EEEEEE;
+    border-bottom: 1px solid #DDDDDD;
+    padding-top: 2px;
+    font-size: 14px;
+}

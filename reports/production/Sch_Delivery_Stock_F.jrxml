@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Outstanding Sales Order" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="64b5dead-d5c3-4326-a6c1-34c7b833c5cf">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/SPS/Outstanding_Sales_Order"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/services/repository"/>
+	<parameter name="REPORT_IMAGE_PREFIX" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost/GAI/sps/images/report"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_USER" class="java.lang.String">
+		<defaultValueExpression><![CDATA["System Administrator"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_ORG" class="java.lang.String"/>
+	<parameter name="REPORT_ORG_NAME" class="java.lang.String"/>
+	<parameter name="REPORT_DATE_START" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_DATE_END" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_PARTNER" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     c_order.`c_order_id` AS c_order_c_order_id,
+     c_order.`document_no` AS c_order_document_no,
+     c_order.`c_bpartner_id` AS c_order_c_bpartner_id,
+     c_order.`order_date` AS c_order_order_date,
+     c_order.`reference_no` AS c_order_reference_no,
+     c_order.`remark` AS c_order_remark,
+     c_order.`m_transaction_type_id` AS c_order_m_transaction_type_id,
+     c_order.`status` AS c_order_status,
+     c_order.`create_date` AS c_order_create_date,
+     c_order.`create_user` AS c_order_create_user,
+     c_order.`update_date` AS c_order_update_date,
+     c_order.`update_user` AS c_order_update_user,
+     c_order.`close_date` AS c_order_close_date,
+     c_order.`close_user` AS c_order_close_user,
+     c_bpartner.`c_bpartner_id` AS c_bpartner_c_bpartner_id,
+     c_bpartner.`partner_code` AS c_bpartner_partner_code,
+     c_bpartner.`partner_name` AS c_bpartner_partner_name,
+     c_bpartner.`partner_status` AS c_bpartner_partner_status,
+     c_order_line.`c_order_line_id` AS c_order_line_c_order_line_id,
+     c_order_line.`c_order_id` AS c_order_line_c_order_id,
+     c_order_line.`schedule_delivery_date` AS c_order_line_schedule_delivery_date,
+     c_order_line.`m_product_id` AS c_order_line_m_product_id,
+     c_order_line.`order_quantity` AS c_order_line_order_quantity,
+     c_order_line.`reserve_quantity` AS c_order_line_reserve_quantity,
+     c_order_line.`delivered_quantity` AS c_order_line_delivered_quantity,
+     c_order_line.`return_quantity` AS c_order_line_return_quantity,
+     c_order_line.`item_description` AS c_order_line_item_description,
+     c_order_line.`item_number` AS c_order_line_item_number,
+     c_order_line.`line_status` AS c_order_line_line_status,
+     m_product.`m_product_id` AS m_product_m_product_id,
+     m_product.`product_code` AS m_product_product_code,
+     m_product.`spec` AS m_product_spec,
+     m_product.`thickness` AS m_product_thickness,
+     m_product.`od` AS m_product_od,
+     m_product.`length` AS m_product_length,
+     m_product.`product_name` AS m_product_product_name,
+     m_product.`description` AS m_product_description,
+    balance_quantity
+FROM
+     `c_bpartner` c_bpartner INNER JOIN `c_order` c_order ON c_bpartner.`c_bpartner_id` = c_order.`c_bpartner_id`
+     INNER JOIN `c_order_line` c_order_line ON c_order.`c_order_id` = c_order_line.`c_order_id`
+     INNER JOIN `m_product` m_product ON c_order_line.`m_product_id` = m_product.`m_product_id`
+    LEFT JOIN (SELECT m_product_id, balance_quantity FROM m_stock_balance_d WHERE latest = 'Y') sb ON (c_order_line.m_product_id = sb.m_product_id)
+WHERE c_order_line.order_quantity - c_order_line.delivered_quantity + c_order_line.return_quantity > 0
+AND c_order_line.schedule_delivery_date BETWEEN $P{REPORT_DATE_START} AND $P{REPORT_DATE_END} AND c_order.app_org_id = $P{REPORT_ORG} AND c_bpartner.`c_bpartner_id` = $P{REPORT_PARTNER}
+ORDER BY c_order_line.schedule_delivery_date]]>
+	</queryString>
+	<field name="c_order_c_order_id" class="java.lang.Integer"/>
+	<field name="c_order_document_no" class="java.lang.String"/>
+	<field name="c_order_c_bpartner_id" class="java.lang.Integer"/>
+	<field name="c_order_order_date" class="java.sql.Date"/>
+	<field name="c_order_reference_no" class="java.lang.String"/>
+	<field name="c_order_remark" class="java.lang.String"/>
+	<field name="c_order_m_transaction_type_id" class="java.lang.Integer"/>
+	<field name="c_order_status" class="java.lang.String"/>
+	<field name="c_order_create_date" class="java.sql.Timestamp"/>
+	<field name="c_order_create_user" class="java.lang.Integer"/>
+	<field name="c_order_update_date" class="java.sql.Timestamp"/>
+	<field name="c_order_update_user" class="java.lang.Integer"/>
+	<field name="c_order_close_date" class="java.sql.Timestamp"/>
+	<field name="c_order_close_user" class="java.lang.Integer"/>
+	<field name="c_bpartner_c_bpartner_id" class="java.lang.Integer"/>
+	<field name="c_bpartner_partner_code" class="java.lang.String"/>
+	<field name="c_bpartner_partner_name" class="java.lang.String"/>
+	<field name="c_bpartner_partner_status" class="java.lang.String"/>
+	<field name="c_order_line_c_order_line_id" class="java.lang.Integer"/>
+	<field name="c_order_line_c_order_id" class="java.lang.Integer"/>
+	<field name="c_order_line_schedule_delivery_date" class="java.sql.Date"/>
+	<field name="c_order_line_m_product_id" class="java.lang.Integer"/>
+	<field name="c_order_line_order_quantity" class="java.lang.Integer"/>
+	<field name="c_order_line_reserve_quantity" class="java.lang.Integer"/>
+	<field name="c_order_line_delivered_quantity" class="java.lang.Integer"/>
+	<field name="c_order_line_return_quantity" class="java.lang.Integer"/>
+	<field name="c_order_line_item_description" class="java.lang.String"/>
+	<field name="c_order_line_item_number" class="java.lang.String"/>
+	<field name="c_order_line_line_status" class="java.lang.String"/>
+	<field name="m_product_m_product_id" class="java.lang.Integer"/>
+	<field name="m_product_product_code" class="java.lang.String"/>
+	<field name="m_product_spec" class="java.lang.String"/>
+	<field name="m_product_thickness" class="java.math.BigDecimal"/>
+	<field name="m_product_od" class="java.math.BigDecimal"/>
+	<field name="m_product_length" class="java.math.BigDecimal"/>
+	<field name="m_product_product_name" class="java.lang.String"/>
+	<field name="m_product_description" class="java.lang.String"/>
+	<field name="balance_quantity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="tgl_kirim">
+		<groupExpression><![CDATA[$F{c_order_line_schedule_delivery_date}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<staticText>
+					<reportElement uuid="e06d3e8d-1e46-4f7c-a9d0-86a3066d9f7a" mode="Opaque" x="218" y="14" width="103" height="15" backcolor="#EEEEEE"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<pen lineColor="#888888"/>
+						<topPen lineColor="#888888"/>
+						<leftPen lineColor="#888888"/>
+						<bottomPen lineWidth="1.0" lineColor="#000000"/>
+						<rightPen lineColor="#888888"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ukuran]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="095edc8c-aa2b-471c-9e2c-7312dc0ff717" mode="Opaque" x="498" y="14" width="57" height="15" backcolor="#EEEEEE"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<pen lineColor="#888888"/>
+						<topPen lineColor="#888888"/>
+						<leftPen lineColor="#888888"/>
+						<bottomPen lineWidth="1.0" lineColor="#000000"/>
+						<rightPen lineColor="#888888"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[No. SC]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="5b51e706-5e22-4b3c-8adf-566611c1c34f" mode="Opaque" x="163" y="14" width="55" height="15" backcolor="#EEEEEE"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<pen lineColor="#888888"/>
+						<topPen lineColor="#888888"/>
+						<leftPen lineColor="#888888"/>
+						<bottomPen lineWidth="1.0" lineColor="#000000"/>
+						<rightPen lineColor="#888888"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Spec]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="388dc172-241d-4544-b155-bd21b2bc72fd" mode="Opaque" x="29" y="14" width="134" height="15" backcolor="#EEEEEE"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<pen lineColor="#888888"/>
+						<topPen lineColor="#888888"/>
+						<leftPen lineColor="#888888"/>
+						<bottomPen lineWidth="1.0" lineColor="#000000"/>
+						<rightPen lineColor="#888888"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Customer]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="aed8c226-ccb8-46d2-b754-89e864ecf564" mode="Opaque" x="439" y="14" width="59" height="15" backcolor="#EEEEEE"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<pen lineColor="#888888"/>
+						<topPen lineColor="#888888"/>
+						<leftPen lineColor="#888888"/>
+						<bottomPen lineWidth="1.0" lineColor="#000000"/>
+						<rightPen lineColor="#888888"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Saldo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="96e320fa-ede2-436d-8730-205483402b34" mode="Opaque" x="0" y="14" width="29" height="15" backcolor="#EEEEEE"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<pen lineColor="#888888"/>
+						<topPen lineColor="#888888"/>
+						<leftPen lineColor="#888888"/>
+						<bottomPen lineWidth="1.0" lineColor="#000000"/>
+						<rightPen lineColor="#888888"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[No.]]></text>
+				</staticText>
+				<textField pattern="dd MMMMM yyyy">
+					<reportElement uuid="7a92e892-5de1-4db6-8a63-871e1387b776" mode="Opaque" x="132" y="0" width="423" height="15" backcolor="#EEEEEE"/>
+					<box>
+						<pen lineColor="#333333"/>
+						<topPen lineWidth="1.0" lineColor="#333333"/>
+						<leftPen lineColor="#333333"/>
+						<bottomPen lineColor="#333333"/>
+						<rightPen lineColor="#333333"/>
+					</box>
+					<textElement>
+						<font isBold="true"/>
+						<paragraph spacingBefore="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{c_order_line_schedule_delivery_date}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="4c15f958-c96e-4fab-853b-63de4bc56df3" mode="Opaque" x="321" y="14" width="59" height="15" backcolor="#EEEEEE"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<pen lineColor="#888888"/>
+						<topPen lineColor="#888888"/>
+						<leftPen lineColor="#888888"/>
+						<bottomPen lineWidth="1.0" lineColor="#000000"/>
+						<rightPen lineColor="#888888"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Qty]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="681200d5-e0bd-472b-aa2d-4b2108f1d699" mode="Opaque" x="0" y="0" width="132" height="15" backcolor="#EEEEEE"/>
+					<box>
+						<topPen lineWidth="1.0" lineColor="#333333"/>
+					</box>
+					<textElement verticalAlignment="Bottom" markup="none">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Rencana Tanggal Kirim :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="385e4a1f-2904-4a48-aa82-caeed59de0e1" mode="Opaque" x="380" y="14" width="59" height="15" backcolor="#EEEEEE"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<pen lineColor="#888888"/>
+						<topPen lineColor="#888888"/>
+						<leftPen lineColor="#888888"/>
+						<bottomPen lineWidth="1.0" lineColor="#000000"/>
+						<rightPen lineColor="#888888"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Stock Qty]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="18">
+				<line>
+					<reportElement uuid="34b3ae00-17e2-4aa0-badc-878d16cca00c" x="0" y="0" width="555" height="1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="52" splitType="Stretch">
+			<textField pattern="">
+				<reportElement uuid="043f0c10-add6-4cbc-bc3b-4660597746e6" x="321" y="26" width="234" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tanggal cetak: " + (new SimpleDateFormat('dd-MM-yyyy HH:mm').format(new java.util.Date()))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0d946515-87d5-4db9-aa86-5e50b0d18f33" x="50" y="12" width="270" height="26"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Schedule Delivery vs Stock"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="6b884dcb-feb8-4976-87ec-59cb91affb67" x="0" y="0" width="40" height="40"/>
+				<imageExpression><![CDATA[$P{REPORT_IMAGE_PREFIX} + "/logo.gif"]]></imageExpression>
+			</image>
+			<textField pattern="">
+				<reportElement uuid="6a000c2f-faf8-4c1c-b005-55935be06e58" x="321" y="12" width="234" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dicetak oleh: " + $P{REPORT_USER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
+			<textField>
+				<reportElement uuid="f75f3dbf-36d7-47ab-9a8a-883ce4dc453b" x="0" y="0" width="555" height="12"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Outstanding Sales Order"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="14">
+			<textField>
+				<reportElement uuid="e8b86d69-6223-4707-9d65-5c98fcc189d7" x="0" y="0" width="29" height="14"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tgl_kirim_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="07757d8e-2dc3-488d-a4b3-ea2ebdeecb26" x="29" y="0" width="134" height="14"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c_bpartner_partner_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement uuid="cff7b699-604c-4c76-8247-04d254a7d8f4" x="163" y="0" width="55" height="14"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{m_product_spec}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement uuid="d525e488-1501-4bcc-8f06-ada610353af7" x="218" y="0" width="103" height="14"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{m_product_od} + " x " + $F{m_product_thickness} + " x " + $F{m_product_length}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement uuid="0294ae41-00a8-4be6-b533-e73594cccff9" x="320" y="0" width="60" height="14"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c_order_line_order_quantity}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement uuid="e3526913-ccd2-41fe-834d-4416718e1924" x="379" y="0" width="60" height="14"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{balance_quantity}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement uuid="82b2b74f-e975-441a-85a7-54b005443491" x="438" y="0" width="60" height="14"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{balance_quantity} - $F{c_order_line_order_quantity}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement uuid="fceccf21-a54c-4356-af16-cee435c6e050" x="498" y="0" width="57" height="14"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{c_order_document_no}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement uuid="0285872d-365e-4e09-911a-5230e100464e" mode="Opaque" x="0" y="12" width="435" height="16" backcolor="#CCCCCC"/>
+				<textElement markup="none">
+					<font size="9" isBold="false"/>
+					<paragraph leftIndent="4" spacingBefore="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_ORG_NAME} + ", PT. SRIREJEKI PERDANA STEEL"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="d2a46d5e-b8cc-46e4-bb48-6042333f5474" mode="Opaque" x="535" y="12" width="20" height="16" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topPadding="3">
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="658feaf7-a6de-4904-ae4a-49ef6755c3d8" mode="Opaque" x="435" y="12" width="100" height="16" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER} + " dari"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

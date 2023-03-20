@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="irStockOnHand" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="199720b4-46d8-4ca9-9c4e-cf9cae3f8e16">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from m_stock_balance inner join m_product on m_stock_balance.m_product_id = m_product.m_product_id
+where m_stock_balance.latest = 'Y']]>
+	</queryString>
+	<field name="m_stock_balance_id" class="java.lang.Integer"/>
+	<field name="m_product_id" class="java.lang.Integer"/>
+	<field name="balance_date" class="java.sql.Date"/>
+	<field name="prev_quantity" class="java.lang.Integer"/>
+	<field name="in_quantity" class="java.lang.Integer"/>
+	<field name="out_quantity" class="java.lang.Integer"/>
+	<field name="balance_quantity" class="java.lang.Integer"/>
+	<field name="latest" class="java.lang.String"/>
+	<field name="product_code" class="java.lang.String"/>
+	<field name="spec" class="java.lang.String"/>
+	<field name="thickness" class="java.math.BigDecimal"/>
+	<field name="weight" class="java.math.BigDecimal"/>
+	<field name="length" class="java.math.BigDecimal"/>
+	<field name="product_name" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="80">
+			<rectangle>
+				<reportElement uuid="e38e24b7-9f95-4459-895a-f11f3389dccf" x="0" y="0" width="555" height="72"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="824243c8-5b3e-432d-a048-06527612e034" x="27" y="54" width="54" height="16"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[PT SPS]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="94b02985-e911-4210-b6ce-8f9b495d4203" x="92" y="0" width="1" height="72"/>
+			</line>
+			<staticText>
+				<reportElement uuid="24089f19-95c5-45c3-9e7b-17e6655f4ab5" x="93" y="24" width="462" height="34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STOCK ON HAND REPORT]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20">
+			<rectangle>
+				<reportElement uuid="78424c63-cb94-4272-94fb-f251aba2ea93" x="0" y="0" width="555" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="4afbb4c0-5115-43c1-aa07-781d5eb1ae11" x="105" y="0" width="307" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[PRODUCT NAME (PART NAME)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ea260c8e-32f2-418f-87ad-184a3b84609b" x="493" y="0" width="62" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[ON HAND]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="5f53a132-d364-4437-9b0b-617cb4972642" x="104" y="0" width="1" height="20"/>
+			</line>
+			<staticText>
+				<reportElement uuid="ea260c8e-32f2-418f-87ad-184a3b84609b" x="413" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[LAST DATE]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="5f53a132-d364-4437-9b0b-617cb4972642" x="492" y="0" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement uuid="5f53a132-d364-4437-9b0b-617cb4972642" x="412" y="0" width="1" height="20"/>
+			</line>
+			<staticText>
+				<reportElement uuid="a3eeef89-8682-4efd-b49c-7a364542edf7" x="0" y="0" width="104" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Product Code]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="6a51e23c-877a-44e1-ac7e-28fe581fe8c5" x="0" y="0" width="555" height="20"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="cbf262ad-f765-4c80-9d5f-f61d070db40b" x="104" y="0" width="1" height="20"/>
+			</line>
+			<textField>
+				<reportElement uuid="ce10cf3f-b261-4c93-8633-38511be1330d" x="110" y="0" width="302" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{product_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="c02d7c7c-9d7e-4095-aadc-0976cf66a7bc" x="493" y="0" width="58" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{balance_quantity}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement uuid="045b13f9-56e3-4add-b75d-cd53d7b9199c" x="413" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{balance_date}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="5f53a132-d364-4437-9b0b-617cb4972642" x="412" y="0" width="1" height="20"/>
+			</line>
+			<line>
+				<reportElement uuid="5f53a132-d364-4437-9b0b-617cb4972642" x="492" y="0" width="1" height="20"/>
+			</line>
+			<textField>
+				<reportElement uuid="9a1a63a1-4961-4274-b639-b6117ceca6bf" x="5" y="0" width="99" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{product_code}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

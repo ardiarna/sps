@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Barang Masuk" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0b614d5e-ad15-4fad-bb02-53188afc1885">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/SPS/Barang_Masuk"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/services/repository"/>
+	<parameter name="REPORT_IMAGE_PREFIX" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost/GAI/sps/images/report"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_DATE_START" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2013-01-01"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_DATE_END" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2013-12-31"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_USER" class="java.lang.String">
+		<defaultValueExpression><![CDATA["System Administrator"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT *
+FROM m_inout
+JOIN m_inout_line USING (m_inout_id)
+JOIN m_product USING (m_product_id)
+JOIN m_warehouse USING (m_warehouse_id)
+WHERE m_transaction_type_id = 3
+AND m_inout_date BETWEEN $P{REPORT_DATE_START} AND $P{REPORT_DATE_END}]]>
+	</queryString>
+	<field name="document_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_inout_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="product_code" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="spec" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="thickness" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="weight" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="length" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="warehouse_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="document_no">
+		<groupExpression><![CDATA[$F{document_no}]]></groupExpression>
+		<groupHeader>
+			<band height="18">
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="555" height="18" backcolor="#EEEEEE" uuid="a9a17a89-c183-41f2-9517-99bd7db64fa3"/>
+					<box topPadding="4" leftPadding="4" rightPadding="4">
+						<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+					</box>
+					<textFieldExpression><![CDATA["Dokumen: " +
+$F{document_no} +
+"\tTanggal: " +
+(new SimpleDateFormat("dd-MM-yyyy").format($F{m_inout_date}))]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="52" splitType="Stretch">
+			<textField>
+				<reportElement x="51" y="26" width="270" height="14" uuid="85961078-5440-44d4-b47e-0c31aaf17ca2"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse($P{REPORT_DATE_START})))
++ " s/d " +
+(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse($P{REPORT_DATE_END})))]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="321" y="12" width="234" height="14" uuid="e3a2c73b-6cdc-4fd3-961b-c572e5287017"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dicetak oleh: " + $P{REPORT_USER}]]></textFieldExpression>
+			</textField>
+			<image isLazy="true">
+				<reportElement x="0" y="0" width="40" height="40" uuid="4c2a7b1b-8fb9-417f-8fc4-039d72f27bd7"/>
+				<imageExpression><![CDATA[$P{REPORT_IMAGE_PREFIX} + "/logo.gif"]]></imageExpression>
+			</image>
+			<textField pattern="">
+				<reportElement x="321" y="26" width="234" height="14" uuid="fa7f555e-4351-4f4a-897d-c24f4ab655b9"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tanggal cetak: " + (new SimpleDateFormat("dd-MM-yyyy HH:mm").format(new java.util.Date()))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="0" width="270" height="26" uuid="de4e1b52-74eb-455a-a384-b5d086a7b5d3"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Barang Masuk"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="12" uuid="8012dff0-05a4-49d8-979a-6c9694fe466f"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Barang Masuk " +
+(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse($P{REPORT_DATE_START})))
++ " s/d " +
+(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse($P{REPORT_DATE_END})))]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="1" width="29" height="18" backcolor="#DDDDDD" uuid="50b9dba1-d4b7-48d2-b620-70795be8507d"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="29" y="1" width="166" height="18" backcolor="#DDDDDD" uuid="cc9da6fb-4274-453a-8a2b-7d1759f0e21d"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kode Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="195" y="1" width="69" height="18" backcolor="#DDDDDD" uuid="5ee8deae-c0a5-4f19-882a-297f27c03d41"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Spec]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="314" y="1" width="50" height="18" backcolor="#DDDDDD" uuid="2e8b7e6a-20b5-4bd7-b4ed-bd8e83254c36"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tebal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="264" y="1" width="50" height="18" backcolor="#DDDDDD" uuid="4fd44037-8a0d-4ca4-8585-cb65c0b1d425"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="364" y="1" width="50" height="18" backcolor="#DDDDDD" uuid="0a8b59b9-934b-4d0e-ab17-101d4332b3bc"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Panjang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="414" y="1" width="87" height="18" backcolor="#DDDDDD" uuid="b24e53bb-b67f-4819-bd58-7383b0bee768"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gudang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="501" y="1" width="54" height="18" backcolor="#DDDDDD" uuid="21949e86-4a51-4c84-b4f4-89d46dd8e865"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jumlah]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="29" height="18" uuid="1ffc5229-363d-4fec-9c08-5aa18d56344c"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{document_no_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="29" y="0" width="166" height="18" uuid="4977c977-2316-41c7-b34b-679a7131c227"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="195" y="0" width="69" height="18" uuid="21cb5e66-3afc-4033-bf22-53e6962e7087"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{spec}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="314" y="0" width="50" height="18" uuid="96c30119-b6df-48b1-9066-d13271babec7"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{thickness}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="264" y="0" width="50" height="18" uuid="0b89234f-6efd-44b5-a6a9-fe344994d7ee"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{weight}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="364" y="0" width="50" height="18" uuid="0c5a71ec-961f-48ec-879d-ab7535e1b5e5"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{length}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="0" width="87" height="18" uuid="0c0c4801-2864-4ca1-a34a-42e590849070"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{warehouse_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="501" y="0" width="54" height="18" uuid="6c6df53e-dfc1-4a01-8b1a-29349197a681"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="3" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="435" y="12" width="100" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="8eaa13f7-532e-4791-b5c7-5c4f727f41f6"/>
+				<box topPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER} + " dari"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="12" width="435" height="16" backcolor="#CCCCCC" uuid="ea22ec93-d0d4-4b5c-9dc9-7effe5baf126"/>
+				<box topPadding="3" leftPadding="4"/>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[RE-CUTTING APPLICATION - PT. SRIREJEKI PERDANA STEEL]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="535" y="12" width="20" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="8c15ab3f-96ff-4d60-89ee-30ab9a5ecb61"/>
+				<box topPadding="3">
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

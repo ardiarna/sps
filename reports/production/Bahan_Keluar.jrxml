@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Barang Keluar" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="581" leftMargin="7" rightMargin="7" topMargin="10" bottomMargin="7" uuid="0b614d5e-ad15-4fad-bb02-53188afc1885">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/SPS/Barang_Keluar"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/services/repository"/>
+	<parameter name="REPORT_IMAGE_PREFIX" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost/GAI/sps/images/report"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_DATE_START" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2013-01-01"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_DATE_END" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2013-12-31"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_USER" class="java.lang.String">
+		<defaultValueExpression><![CDATA["System Administrator"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_ORG" class="java.lang.String"/>
+	<parameter name="REPORT_ORG_NAME" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT m_inout.*, m_inout_line.*, c_order.document_no nomor_so, c_order.reference_no po_no, order_date, partner_name, product_code, machine_code
+FROM m_inout
+LEFT JOIN m_machine ON(m_inout.tuj_org_id=m_machine.m_machine_id)
+LEFT JOIN c_order ON (m_inout.c_order_id=c_order.c_order_id)
+LEFT JOIN c_bpartner ON(c_order.c_bpartner_id=c_bpartner.c_bpartner_id)
+JOIN m_inout_line ON(m_inout.m_inout_id=m_inout_line.m_inout_id)
+JOIN m_product ON(m_inout_line.m_product_id=m_product.m_product_id)
+JOIN m_warehouse ON(m_inout_line.m_warehouse_id=m_warehouse.m_warehouse_id)
+WHERE m_inout.m_transaction_type_id = 4
+AND m_inout_date BETWEEN $P{REPORT_DATE_START} AND $P{REPORT_DATE_END} AND m_inout.app_org_id = $P{REPORT_ORG}
+ORDER BY m_inout_date, document_no]]>
+	</queryString>
+	<field name="m_inout_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="app_org_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_inout_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="document_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="c_order_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_transaction_type_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_inout_id_ref" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Dokumen yang dikoreksi/retur]]></fieldDescription>
+	</field>
+	<field name="create_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_work_order_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tuj_org_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dokumen" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="no_kendaraan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="c_spk_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_inout_line_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_product_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_warehouse_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="c_order_line_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_work_order_line_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="return_ref" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ket" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="c_spk_line_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="no_box" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="isi_box" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomor_so" class="java.lang.String"/>
+	<field name="po_no" class="java.lang.String"/>
+	<field name="order_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="partner_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="product_code" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="machine_code" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="quantity_grup1" class="java.lang.Integer" resetType="Group" resetGroup="tanggal" calculation="Sum">
+		<variableExpression><![CDATA[$F{quantity}]]></variableExpression>
+	</variable>
+	<variable name="quantity_all" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{quantity}]]></variableExpression>
+	</variable>
+	<group name="tanggal">
+		<groupExpression><![CDATA[$F{m_inout_date}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<textField>
+					<reportElement uuid="a9a17a89-c183-41f2-9517-99bd7db64fa3" mode="Opaque" x="0" y="0" width="580" height="18" backcolor="#EEEEEE"/>
+					<box topPadding="4" leftPadding="4" rightPadding="4">
+						<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+					</box>
+					<textElement/>
+					<textFieldExpression><![CDATA["Tgl. Keluar: " +
+(new SimpleDateFormat("dd-MM-yyyy").format($F{m_inout_date}))]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="19">
+				<textField pattern="#,##0">
+					<reportElement uuid="51a21bf9-2109-4a56-a6ce-4a1d2f967ddc" x="483" y="0" width="97" height="18"/>
+					<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2">
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{quantity_grup1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="2c2d4d54-3712-48b3-bdc0-3e8752c7f948" mode="Opaque" x="430" y="0" width="53" height="18" backcolor="#DDDDDD"/>
+					<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sub Total]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="52" splitType="Stretch">
+			<textField>
+				<reportElement uuid="85961078-5440-44d4-b47e-0c31aaf17ca2" x="51" y="26" width="270" height="14"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse($P{REPORT_DATE_START})))
++ " s/d " +
+(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse($P{REPORT_DATE_END})))]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="e3a2c73b-6cdc-4fd3-961b-c572e5287017" x="345" y="12" width="234" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dicetak oleh: " + $P{REPORT_USER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="4c2a7b1b-8fb9-417f-8fc4-039d72f27bd7" x="0" y="0" width="40" height="40"/>
+				<imageExpression><![CDATA[$P{REPORT_IMAGE_PREFIX} + "/logo.gif"]]></imageExpression>
+			</image>
+			<textField pattern="">
+				<reportElement uuid="fa7f555e-4351-4f4a-897d-c24f4ab655b9" x="345" y="26" width="234" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tanggal cetak: " + (new SimpleDateFormat("dd-MM-yyyy HH:mm").format(new java.util.Date()))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="de4e1b52-74eb-455a-a384-b5d086a7b5d3" x="51" y="0" width="270" height="26"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Barang Keluar LP"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20">
+			<printWhenExpression><![CDATA[$V{PAGE_NUMBER} > 1]]></printWhenExpression>
+			<textField>
+				<reportElement uuid="8012dff0-05a4-49d8-979a-6c9694fe466f" x="0" y="0" width="555" height="12"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Barang Keluar " +
+(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse($P{REPORT_DATE_START})))
++ " s/d " +
+(new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse($P{REPORT_DATE_END})))]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="50b9dba1-d4b7-48d2-b620-70795be8507d" mode="Opaque" x="0" y="1" width="29" height="18" backcolor="#DDDDDD"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cc9da6fb-4274-453a-8a2b-7d1759f0e21d" mode="Opaque" x="29" y="1" width="87" height="18" backcolor="#DDDDDD"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No Dokumen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5ee8deae-c0a5-4f19-882a-297f27c03d41" mode="Opaque" x="116" y="1" width="100" height="18" backcolor="#DDDDDD"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2e8b7e6a-20b5-4bd7-b4ed-bd8e83254c36" mode="Opaque" x="344" y="1" width="47" height="18" backcolor="#DDDDDD"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mesin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b24e53bb-b67f-4819-bd58-7383b0bee768" mode="Opaque" x="391" y="1" width="145" height="18" backcolor="#DDDDDD"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="21949e86-4a51-4c84-b4f4-89d46dd8e865" mode="Opaque" x="536" y="1" width="44" height="18" backcolor="#DDDDDD"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jumlah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="132ddbfa-68d6-4ebd-b71f-a65d6e8455c7" mode="Opaque" x="216" y="1" width="128" height="18" backcolor="#DDDDDD"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No SC (PO Number)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement uuid="1ffc5229-363d-4fec-9c08-5aa18d56344c" x="0" y="0" width="25" height="18"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tanggal_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4977c977-2316-41c7-b34b-679a7131c227" x="25" y="0" width="85" height="18"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{document_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="21cb5e66-3afc-4033-bf22-53e6962e7087" x="210" y="0" width="134" height="18"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomor_so} == null ? "" : $F{nomor_so} +" (" +$F{po_no} +")"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="0c0c4801-2864-4ca1-a34a-42e590849070" x="391" y="0" width="145" height="18"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partner_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="6c6df53e-dfc1-4a01-8b1a-29349197a681" x="536" y="0" width="44" height="18"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6d63b0da-d010-47aa-9668-e2aa27144c12" x="110" y="0" width="100" height="18"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_code}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="cc61b1c7-2f4c-47d6-8144-7a08f62a3a8a" x="344" y="0" width="47" height="18"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{machine_code}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement uuid="8eaa13f7-532e-4791-b5c7-5c4f727f41f6" mode="Opaque" x="461" y="12" width="100" height="16" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER} + " dari"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="582c0c7a-d90e-4f97-8e07-570ed2745329" mode="Opaque" x="0" y="12" width="461" height="16" backcolor="#CCCCCC"/>
+				<textElement markup="none">
+					<font size="9" isBold="false"/>
+					<paragraph leftIndent="4" spacingBefore="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_ORG_NAME} + ", PT. SRIREJEKI PERDANA STEEL"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="8c15ab3f-96ff-4d60-89ee-30ab9a5ecb61" mode="Opaque" x="561" y="12" width="20" height="16" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topPadding="3">
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="47">
+			<staticText>
+				<reportElement uuid="6a0a4230-5098-494a-aa74-d49051823a7e" mode="Opaque" x="418" y="0" width="65" height="18" backcolor="#DDDDDD"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grand Total]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement uuid="d86cae34-a7cc-4bec-8041-e218f02b6a13" x="483" y="0" width="97" height="18"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{quantity_all}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="70c53cd6-9f29-499b-9b0a-4557b0e52eca" mode="Opaque" x="561" y="27" width="20" height="16" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topPadding="3">
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4a50abaa-c895-4c04-a3fc-f2cc1f5a4dab" mode="Opaque" x="461" y="27" width="100" height="16" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box topPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER} + " dari"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="50a410ef-86fc-471e-95f2-4cf59dbca8ca" mode="Opaque" x="0" y="27" width="461" height="16" backcolor="#CCCCCC"/>
+				<textElement markup="none">
+					<font size="9" isBold="false"/>
+					<paragraph leftIndent="4" spacingBefore="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_ORG_NAME} + ", PT. SRIREJEKI PERDANA STEEL"]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

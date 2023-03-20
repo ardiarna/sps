@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Bukti Barang Masuk" language="groovy" pageWidth="595" pageHeight="842" columnWidth="581" leftMargin="7" rightMargin="7" topMargin="7" bottomMargin="7" uuid="316f88c3-e74a-4197-8713-7a8de20fded6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_IMAGE_PREFIX" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost/GAI/sps/images/report"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REPORT_ID_PENERIMAAN" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from m_inout
+inner join m_transaction_type on m_inout.m_transaction_type_id = m_transaction_type.m_transaction_type_id
+left join c_bpartner on m_inout.tuj_org_id=c_bpartner.c_bpartner_id
+inner join m_inout_line on m_inout.m_inout_id = m_inout_line.m_inout_id
+inner join m_product on m_inout_line.m_product_id = m_product.m_product_id
+inner join app_org on m_inout.app_org_id=app_org.app_org_id
+WHERE m_inout.m_inout_id = $P{REPORT_ID_PENERIMAAN}]]>
+	</queryString>
+	<field name="m_inout_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="app_org_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_inout_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="document_no" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="c_order_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_transaction_type_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_inout_id_ref" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Dokumen yang dikoreksi/retur]]></fieldDescription>
+	</field>
+	<field name="create_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_work_order_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tuj_org_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dokumen" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="no_kendaraan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="c_spk_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="create_user" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="update_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="update_user" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="type_code" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="type_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="operation" class="java.lang.Integer">
+		<fieldDescription><![CDATA[1=masuk, -1=keluar]]></fieldDescription>
+	</field>
+	<field name="c_bpartner_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="partner_code" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="partner_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="partner_status" class="java.lang.String">
+		<fieldDescription><![CDATA[C = Customer, V = Vendor, E = Employee]]></fieldDescription>
+	</field>
+	<field name="active" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_inout_line_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_product_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_warehouse_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="c_order_line_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="m_work_order_line_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="return_ref" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ket" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="c_spk_line_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="no_box" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="isi_box" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="no_coil" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="no_lot" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="product_code" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="spec" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="od" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="thickness" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="length" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="product_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="model" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="minimum_qty" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="parent_org_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="organization" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="is_trx" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="doc_no_prefix" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<filterExpression><![CDATA[$F{m_transaction_type_id} == 3]]></filterExpression>
+	<group name="order_id">
+		<groupExpression><![CDATA[$F{m_inout_id}]]></groupExpression>
+	</group>
+	<background>
+		<band height="408">
+			<staticText>
+				<reportElement uuid="fc8e85ae-71ee-4663-9b95-29cb3d90d824" x="415" y="295" width="129" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[Diterima Oleh,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="703f5e12-7606-4a13-86e3-e96e5e811cff" x="415" y="355" width="129" height="12"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[Spv. Gudang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1c747043-350e-4595-85d9-62d398738d26" x="38" y="295" width="129" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[Dibuat Oleh,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bda1ff89-f70b-4192-b545-18b26d920acc" x="38" y="355" width="129" height="12"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[Bagian Gudang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="76b86058-7e7a-48ab-8620-1e4f977c49f0" x="8" y="369" width="352" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<text><![CDATA[Note : 1. Gudang Recutting      2. ADM Stock Recutting]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="24ed0e46-1c25-4b34-9aba-fa3a059718c1" x="278" y="104" width="114" height="20"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[UKURAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="25314790-6e29-4d5e-818b-17a0f2653dc4" x="218" y="104" width="60" height="20"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[SPEC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="350949c7-671b-4079-889c-c3122e24058b" x="392" y="104" width="68" height="20"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[NO BOX]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3e392e40-7c9d-4fd8-9b16-528d10857071" x="508" y="104" width="65" height="20"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[JUMLAH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="26719812-4895-495d-abe2-44b37c057ecd" x="8" y="104" width="35" height="20"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9ad7168d-1216-4060-b319-c965e4945f98" x="43" y="104" width="55" height="20"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[NO SC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c0d8f2ce-c661-4f25-9a98-6f324d04234d" x="460" y="104" width="48" height="20"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[ISI BOX]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="31a582a3-fc71-4ae4-9a32-964a1ecdccf5" x="98" y="104" width="120" height="20"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[KODE BARANG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ac338777-bc8b-438c-bd08-368249b5bce2" x="435" y="19" width="56" height="14"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<text><![CDATA[Revisi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="76d4926b-acd5-40ad-8f1d-55a430add31d" x="435" y="5" width="56" height="14"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<text><![CDATA[No Dokumen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e100e0c8-b0a3-406e-abfa-832793b4f499" x="93" y="5" width="342" height="28"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="14"/>
+				</textElement>
+				<text><![CDATA[FORM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="08fd8d1d-f006-4956-a89f-47b18d14b706" x="491" y="19" width="11" height="14"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Consolas"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="749063d2-29bd-414b-81af-6e19b9dd736e" x="502" y="33" width="76" height="14"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<text><![CDATA[30 Juli 2012]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="871929a0-e32e-4cc9-8948-e39d96aeb2bc" x="93" y="33" width="342" height="28"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Consolas" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{app_org_id}.equals(3) ? "BUKTI MASUK BARANG JADI RECUTTING (BMBJR)":
+($F{app_org_id}.equals(4) ? "BUKTI MASUK BAHAN BAKU RECUTTING (BMBBR)":
+($F{app_org_id}.equals(5) ? "BUKTI MASUK BARANG JADI ERW (BMBJE)":
+($F{app_org_id}.equals(6) ? "BUKTI MASUK BARANG JADI DRW (BMBJD)":
+    "BUKTI MASUK BARANG JADI (BMBJ)")))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="cff1477d-db7c-444c-b9c8-6dd901538ed5" x="491" y="33" width="11" height="14"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Consolas"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8125fcc9-d724-4169-9d08-afbc774792b0" x="5" y="45" width="87" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Consolas" size="12"/>
+				</textElement>
+				<text><![CDATA[PT SPS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40257bff-76bd-4293-a4ee-2856707472e0" x="435" y="33" width="56" height="14"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<text><![CDATA[Tgl Efektif]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="e74c9991-267e-453d-9aef-0759addcaafc" x="502" y="47" width="76" height="14"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER} +" dari "+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c27a3d59-64d5-49ae-8f20-6e9e0a825184" x="435" y="47" width="56" height="14"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<text><![CDATA[Halaman]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6f10676c-26eb-474d-9921-c4b195c20bca" x="502" y="19" width="76" height="14"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<text><![CDATA[02]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="de4d18a7-b43d-44ab-bd99-2dfdd8b2311a" x="502" y="5" width="76" height="14"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<text><![CDATA[FRM/PPC/701.36]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="32047a3c-884b-4d5f-a641-3e202ccd1058" x="491" y="47" width="11" height="14"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Consolas"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f03771b7-c2e4-4ccd-8180-a625aa5c80b8" x="491" y="5" width="11" height="14"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Consolas"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement uuid="82c6b5b8-f7d9-45b3-b9ef-c95bef6e6691" positionType="Float" x="23" y="7" width="49" height="37"/>
+				<imageExpression><![CDATA[$P{REPORT_IMAGE_PREFIX} + "/sps.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="71713025-2911-4536-8aba-d4927ea01261" x="10" y="83" width="60" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[PELANGGAN]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b95bbb9e-ad28-4745-b135-b1f2e15bdbd9" x="71" y="64" width="217" height="17"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dokumen}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e3b87892-0fe2-4124-a689-3669f6ed1b03" x="10" y="64" width="60" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[NO. W / O]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="7dfcfbf6-7a58-48c0-a3d2-f0574bfaca7a" x="71" y="83" width="256" height="17"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{partner_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c85b8b52-fe62-485f-983c-8e1f3ea9e471" x="379" y="83" width="60" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[TANGGAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9084be1d-baf9-4f3f-a448-96a41c64a7dc" x="379" y="64" width="60" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<text><![CDATA[NO. BMBJ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="ba3ef874-df9a-4904-aef7-383e736cbb11" x="440" y="64" width="122" height="17"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{document_no}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="387c6da5-b213-4e5d-992f-53b89f0cc36a" x="440" y="83" width="122" height="17"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{m_inout_date}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="95627995-6085-45c2-a9a4-1164530370f0" x="3" y="5" width="1" height="383"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="01a5357b-c3c1-4476-8163-de4cb7d9584b" x="578" y="5" width="1" height="383"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="d8f05252-e854-4191-92a5-b66967fe7d51" x="8" y="124" width="1" height="167"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="6abfbe75-54f6-4fbe-9bb9-4c9772542a17" x="3" y="389" width="575" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="927d02ac-0363-4e94-87c2-145f7287273a" x="8" y="291" width="565" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="ffa247f7-5857-44ee-b72d-407b60608b97" x="573" y="124" width="1" height="167"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="922ed583-225d-4aa2-9df3-b969da4f6526" x="4" y="5" width="89" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="458d4574-7449-4b09-84f0-d1abf08703ef" x="4" y="61" width="89" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="128"/>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="fd61ee55-0523-448a-a6fd-344187da1f87" x="98" y="0" width="120" height="20"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="83768d14-cffb-4755-b956-1b1c48046773" x="218" y="0" width="60" height="20"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{spec}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="aeccafcb-8f69-464c-9ce9-90f39bd234a3" x="460" y="0" width="48" height="20"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8f8f7268-35aa-4f04-a8d9-860b281dd00e" x="278" y="0" width="114" height="20"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{thickness}.toString() +"x"+$F{od}.toString() +"x"+ $F{length}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="c40298b9-d1ee-4355-85ca-01a712214873" x="392" y="0" width="68" height="20"/>
+				<box topPadding="1" leftPadding="2" bottomPadding="1" rightPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_box}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,127 @@
+<?php
+
+/**
+ * Dikembangkan oleh
+ * PT. GLOBAL ANUGERAH INDONESIA
+ * Azwari Nugraha <nugraha@pt-gai.org>
+ * 05/12/2013 14:35:39
+ */
+
+require_once '../init.php';
+
+if (!authenticated()) {
+    header("Location: ../index.php");
+    exit;
+}
+
+$cgx_sql = "SELECT m_production.*, m_production_line.*, m_work_order.document_no wo, c_order.document_no so, COALESCE(remark,c_forecast.document_no) remark, reference_no, 
+    COALESCE(c_bpartner.partner_name,cb2.partner_name) partner_name, machine_name, product_code, product_name, auc.user_fullname, auu.user_fullname user_fullname_u 
+    FROM m_production
+    JOIN m_work_order USING (m_work_order_id) 
+    JOIN m_machine ON (m_production.m_machine_id = m_machine.m_machine_id)
+    JOIN m_production_line USING (m_production_id)
+    JOIN m_work_order_line USING (m_work_order_line_id) 
+    LEFT JOIN c_order USING (c_order_id) 
+    LEFT JOIN c_bpartner USING (c_bpartner_id)
+    LEFT JOIN c_forecast ON (m_work_order_line.c_forecast_id=c_forecast.c_forecast_id)
+    LEFT JOIN c_bpartner cb2 ON (c_forecast.c_bpartner_id=cb2.c_bpartner_id) 
+    JOIN m_product ON(m_work_order_line.m_product_id=m_product.m_product_id) 
+    LEFT JOIN app_user auc ON (m_production.create_user=auc.user_id) 
+    LEFT JOIN app_user auu ON (m_production.update_user=auu.user_id) 
+    WHERE 1 = 1 AND " . org_filter_trx('m_work_order.app_org_id');
+
+$mesin = $_REQUEST['mesin'];
+$date_f = $_REQUEST['date_f'];
+$date_t = $_REQUEST['date_t'];
+$item_number = $_REQUEST['item_number'];
+$document_no = $_REQUEST['document_no'];
+$sc_number = $_REQUEST['sc_number'];
+$customer = $_REQUEST['customer'];
+
+if ($mesin) $cgx_sql .= " AND m_production.m_machine_id = '" . mysql_escape_string($mesin) . "'";
+if ($document_no) $cgx_sql .= " AND m_work_order.document_no LIKE '%" . mysql_escape_string($document_no) . "%'";
+if ($item_number) $cgx_sql .= " AND (product_code LIKE '%" . mysql_escape_string($item_number) . "%' OR product_name LIKE '%" . mysql_escape_string($item_number) . "%' OR description LIKE '%" . mysql_escape_string($item_number) . "%')";
+if ($date_f) $cgx_sql .= " AND m_work_order.order_date >= '" . npl_dmy2ymd($date_f) . "'";
+if ($date_t) $cgx_sql .= " AND m_work_order.order_date <= '" . npl_dmy2ymd($date_t) . "'";
+if ($sc_number) $cgx_sql .= " AND c_order.remark LIKE '%" . mysql_escape_string($sc_number) . "%'";
+if ($customer) $cgx_sql .= " AND (c_bpartner.partner_name LIKE '%" . mysql_escape_string($customer) . "%' OR cb2.partner_name LIKE '%" . mysql_escape_string($customer) . "%')";
+
+if ($_REQUEST['mode'] == 'export-all') {
+    header("Content-Type: text/csv");
+    header("Content-Disposition: attachment; filename=\"realisasi-work-order-" . date("Y-m-d") . ".csv\"");
+    echo "\"NO. DOKUMEN\"";
+    echo ",\"TANGGAL\"";
+    echo ",\"NO. WO\"";
+    echo ",\"TANGGAL WO\"";
+    echo ",\"NO. SC\"";
+    echo ",\"REMARK / FORECAST\"";
+    echo ",\"PO NUMBER\"";
+    echo ",\"CUSTOMER\"";
+    echo ",\"MACHINE\"";
+    echo ",\"ITEM NUMBER\"";
+    echo ",\"SPEC\"";
+    echo ",\"OD\"";
+    echo ",\"THICKNESS\"";
+    echo ",\"LENGTH\"";
+    echo ",\"KODE COIL\"";
+    echo ",\"LOT NUMBER\"";
+    echo ",\"QTY WO\"";
+    echo ",\"QTY CUTTING\"";
+    echo ",\"QTY CHAMPER\"";
+    echo ",\"QTY SIKAT\"";
+    echo ",\"QTY POLESING\"";
+    echo ",\"QTY BENDING\"";
+    echo ",\"QTY QUENCING\"";
+    echo "\n";
+    $cgx_rs_export = mysql_query($cgx_sql, $cgx_connection);
+    while (($cgx_dt_export = mysql_fetch_array($cgx_rs_export, MYSQL_ASSOC)) !== FALSE) {
+        echo "\"" . str_replace("\"", "\"\"", $cgx_dt_export['document_no']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['production_date']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['wo']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['order_date']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['so']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['remark']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['reference_no']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['partner_name']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['machine_name']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['product_code']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['spec']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['od']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['thickness']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['length']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['no_coil']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['no_lot']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['order_quantity']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['good']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['good_ch']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['good_sk']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['good_pl']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['good_bd']) . "\"";
+        echo ",\"" . str_replace("\"", "\"\"", $cgx_dt_export['good_qc']) . "\"";
+        echo "\n";
+    }
+    mysql_free_result($cgx_rs_export);
+    exit;
+} elseif ($_REQUEST['mode'] == 'delete') {
+    $cgx_sql = "DELETE FROM  ";
+    $cgx_sql .= " WHERE";
+}
+
+if (@mysql_query($cgx_sql, $cgx_connection)) {
+    $_SESSION[$GLOBALS['APP_ID']]['view.hpm']['error'] = FALSE;
+    $_SESSION[$GLOBALS['APP_ID']]['view.hpm']['info'] = 'Data anda sudah berhasil diperbarui';
+    if ($_REQUEST['mode'] == 'new') $cgx_new_id = $_REQUEST['data']['Array'];
+} else {
+    $_SESSION[$GLOBALS['APP_ID']]['view.hpm']['error'] = mysql_error($cgx_connection);
+}
+
+if ($_REQUEST['mode'] == 'update') {
+    header("Location: ../index.php?" . urldecode($_REQUEST['backvar']) . "&");
+} elseif ($_REQUEST['mode'] == 'new') {
+    header("Location: ../index.php?" . urldecode($_REQUEST['backvar']) . "&");
+} elseif ($_REQUEST['mode'] == 'delete') {
+    header("Location: ../index.php?" . urldecode($_REQUEST['backvar']));
+}
+exit;
+
+?>

@@ -1,0 +1,827 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0b614d5e-ad15-4fad-bb02-53188afc1885">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="31"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="REPORT_IMAGE_PREFIX" class="java.lang.String">
+		<defaultValueExpression><![CDATA["http://localhost/GAI/sps/images/report"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     c_order.`c_order_id` AS c_order_c_order_id,
+     c_order.`document_no` AS c_order_document_no,
+     c_order.`c_bpartner_id` AS c_order_c_bpartner_id,
+     c_order.`order_date` AS c_order_order_date,
+     c_order.`reference_no` AS c_order_reference_no,
+     c_order.`remark` AS c_order_remark,
+     c_order.`m_transaction_type_id` AS c_order_m_transaction_type_id,
+     c_order.`status` AS c_order_status,
+     c_order.`create_date` AS c_order_create_date,
+     c_order.`create_user` AS c_order_create_user,
+     c_order.`update_date` AS c_order_update_date,
+     c_order.`update_user` AS c_order_update_user,
+     c_order.`close_date` AS c_order_close_date,
+     c_order.`close_user` AS c_order_close_user,
+     c_bpartner.`c_bpartner_id` AS c_bpartner_c_bpartner_id,
+     c_bpartner.`partner_code` AS c_bpartner_partner_code,
+     c_bpartner.`partner_name` AS c_bpartner_partner_name,
+     c_bpartner.`partner_status` AS c_bpartner_partner_status,
+     c_order_line.`c_order_line_id` AS c_order_line_c_order_line_id,
+     c_order_line.`c_order_id` AS c_order_line_c_order_id,
+     c_order_line.`schedule_delivery_date` AS c_order_line_schedule_delivery_date,
+     c_order_line.`m_product_id` AS c_order_line_m_product_id,
+     c_order_line.`order_quantity` AS c_order_line_order_quantity,
+     c_order_line.`reserve_quantity` AS c_order_line_reserve_quantity,
+     c_order_line.`delivered_quantity` AS c_order_line_delivered_quantity,
+     c_order_line.`return_quantity` AS c_order_line_return_quantity,
+     c_order_line.`item_description` AS c_order_line_item_description,
+     c_order_line.`item_number` AS c_order_line_item_number,
+     c_order_line.`line_status` AS c_order_line_line_status,
+     m_product.`m_product_id` AS m_product_m_product_id,
+     m_product.`product_code` AS m_product_product_code,
+     m_product.`spec` AS m_product_spec,
+     m_product.`thickness` AS m_product_thickness,
+     m_product.`weight` AS m_product_weight,
+     m_product.`length` AS m_product_length,
+     m_product.`product_name` AS m_product_product_name,
+     m_product.`description` AS m_product_description
+FROM
+     `c_bpartner` c_bpartner INNER JOIN `c_order` c_order ON c_bpartner.`c_bpartner_id` = c_order.`c_bpartner_id`
+     INNER JOIN `c_order_line` c_order_line ON c_order.`c_order_id` = c_order_line.`c_order_id`
+     INNER JOIN `m_product` m_product ON c_order_line.`m_product_id` = m_product.`m_product_id`]]>
+	</queryString>
+	<field name="c_order_c_order_id" class="java.lang.Integer"/>
+	<field name="c_order_document_no" class="java.lang.String"/>
+	<field name="c_order_c_bpartner_id" class="java.lang.Integer"/>
+	<field name="c_order_order_date" class="java.sql.Date"/>
+	<field name="c_order_reference_no" class="java.lang.String"/>
+	<field name="c_order_remark" class="java.lang.String"/>
+	<field name="c_order_m_transaction_type_id" class="java.lang.Integer"/>
+	<field name="c_order_status" class="java.lang.String"/>
+	<field name="c_order_create_date" class="java.sql.Timestamp"/>
+	<field name="c_order_create_user" class="java.lang.Integer"/>
+	<field name="c_order_update_date" class="java.sql.Timestamp"/>
+	<field name="c_order_update_user" class="java.lang.Integer"/>
+	<field name="c_order_close_date" class="java.sql.Timestamp"/>
+	<field name="c_order_close_user" class="java.lang.Integer"/>
+	<field name="c_bpartner_c_bpartner_id" class="java.lang.Integer"/>
+	<field name="c_bpartner_partner_code" class="java.lang.String"/>
+	<field name="c_bpartner_partner_name" class="java.lang.String"/>
+	<field name="c_bpartner_partner_status" class="java.lang.String"/>
+	<field name="c_order_line_c_order_line_id" class="java.lang.Integer"/>
+	<field name="c_order_line_c_order_id" class="java.lang.Integer"/>
+	<field name="c_order_line_schedule_delivery_date" class="java.sql.Date"/>
+	<field name="c_order_line_m_product_id" class="java.lang.Integer"/>
+	<field name="c_order_line_order_quantity" class="java.lang.Integer"/>
+	<field name="c_order_line_reserve_quantity" class="java.lang.Integer"/>
+	<field name="c_order_line_delivered_quantity" class="java.lang.Integer"/>
+	<field name="c_order_line_return_quantity" class="java.lang.Integer"/>
+	<field name="c_order_line_item_description" class="java.lang.String"/>
+	<field name="c_order_line_item_number" class="java.lang.String"/>
+	<field name="c_order_line_line_status" class="java.lang.String"/>
+	<field name="m_product_m_product_id" class="java.lang.Integer"/>
+	<field name="m_product_product_code" class="java.lang.String"/>
+	<field name="m_product_spec" class="java.lang.String"/>
+	<field name="m_product_thickness" class="java.math.BigDecimal"/>
+	<field name="m_product_weight" class="java.math.BigDecimal"/>
+	<field name="m_product_length" class="java.math.BigDecimal"/>
+	<field name="m_product_product_name" class="java.lang.String"/>
+	<field name="m_product_description" class="java.lang.String"/>
+	<group name="c_order_document_no">
+		<groupExpression><![CDATA[$F{c_order_document_no}]]></groupExpression>
+		<groupHeader>
+			<band height="18">
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="555" height="18" backcolor="#EEEEEE" uuid="a9a17a89-c183-41f2-9517-99bd7db64fa3"/>
+					<box topPadding="4" leftPadding="4" rightPadding="4">
+						<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+					</box>
+					<textFieldExpression><![CDATA[$F{c_order_document_no}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="53" splitType="Stretch">
+			<image isLazy="true">
+				<reportElement x="0" y="0" width="40" height="40" uuid="16e54b1b-e92a-4ed7-a635-85ce37c2134d"/>
+				<imageExpression><![CDATA[$P{REPORT_IMAGE_PREFIX} + "/logo.gif"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="51" y="0" width="504" height="28" uuid="ae16bba3-26c4-4f3b-b0d7-744066818651"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Report Title"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="28" width="504" height="12" uuid="dfa77f8c-1726-4547-8b2d-1aa27fe29d9a"/>
+				<textElement verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sub Title"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy HH:mm">
+				<reportElement x="436" y="40" width="119" height="12" uuid="45756341-d02e-46d1-96bd-0c21a8c3be57"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="34fc590b-9eb3-4d26-a658-d8d06de51a1a"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_c_order_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="15" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="ebb031f7-3f57-4bbe-a0eb-d97834ae151f"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_c_bpartner_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="30" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="10798b86-3592-4691-adb4-8d5e2f55f146"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_order_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="45" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="756df4db-7e63-4735-aae7-1f6897b02123"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_reference_no]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="60" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="5f2f7e4e-c445-4cfe-bf7a-8c98d3bd1d85"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_remark]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="75" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="6448d6b2-61d4-4130-950c-53a24cefd763"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_m_transaction_type_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="90" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="55f1c894-7bca-4464-b969-8211d53b5996"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="105" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="e0344d5e-59dd-4843-b5fc-b215d5097f2a"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_create_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="120" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="a86498da-3589-4bba-ba9d-b6c2015ed26b"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_create_user]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="135" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="32ff8409-4fde-4bbe-a156-4cccfa2d4cc3"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_update_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="150" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="9ea4d662-f0e2-4b28-8462-7ad400e08360"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_update_user]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="165" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="a10db169-382b-4b97-a7b4-d20ec2dd3f08"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_close_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="180" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="7fedf555-c0d4-4ba8-ac80-947e8cec2e30"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_close_user]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="195" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="4f5a3571-deed-4694-bdf6-61ba1e90b960"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_bpartner_c_bpartner_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="210" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="0c8d50b8-e81c-4224-bc85-b6cb127e2812"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_bpartner_partner_code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="225" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="ea63dc1d-2669-40af-9b0d-22553c4f47ce"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_bpartner_partner_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="240" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="f493d006-2383-4f7e-aa7c-68d1eaed6abe"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_bpartner_partner_status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="255" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="5080bf2f-0881-4ff0-94a0-809a20958929"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_line_c_order_line_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="270" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="3e8848e4-a6de-4494-8105-08905b9b3df6"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_line_c_order_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="285" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="028a2701-7cec-4c92-b1de-1e1ef1aa379d"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_line_schedule_delivery_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="300" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="c835eeaa-20c0-4dea-bb39-c29ee0c2ae4a"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_line_m_product_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="315" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="ac8af7b2-c368-4116-af77-07922afaf08e"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_line_order_quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="330" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="e0a126e3-e867-46f7-b229-8cc9dab22162"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_line_reserve_quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="345" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="a039b798-692b-4292-b85f-050a49b38ca7"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_line_delivered_quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="360" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="2eaa00a0-f965-47df-861b-4ce7520fa3bc"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_line_return_quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="375" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="49194c0b-894c-46c5-ad29-24ba5dc369f3"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_line_item_description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="390" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="af896d54-3cce-4d58-8904-94f3d91c7e31"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_line_item_number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="405" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="98504e8b-a819-4eee-aba1-8e160aecb844"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[c_order_line_line_status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="420" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="40d4d769-56cd-43c0-93ae-da6fe559925f"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[m_product_m_product_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="435" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="1aebe805-7428-4180-b1b0-4266ed9db6f0"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[m_product_product_code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="450" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="d59c977e-ce5b-4e44-b9b3-1f1875909455"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[m_product_spec]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="465" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="37a25f9a-7cff-4d3b-b7e9-99b78ca99d01"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[m_product_thickness]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="480" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="20eb6d9d-e13b-4522-8b21-a7ea0bd11c57"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[m_product_weight]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="495" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="a25403d3-802f-4445-aa15-29dca489de42"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[m_product_length]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="510" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="7dc84bb0-4182-4ba2-9257-6e10fac1ed20"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[m_product_product_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="525" y="0" width="15" height="18" backcolor="#DDDDDD" uuid="ac4dc9e2-ba29-435e-bbe8-08339fb14ce5"/>
+				<box topPadding="4" leftPadding="4" bottomPadding="0" rightPadding="4">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[m_product_description]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="15" height="18" uuid="eaf4f557-e743-48b3-aa9c-c56cd8f28931"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_c_order_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="0" width="15" height="18" uuid="c2d53288-b05d-434a-bb8c-6d5fdd120c82"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_c_bpartner_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="0" width="15" height="18" uuid="020de568-9e54-4d33-9fd4-275e72f438b3"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_order_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="0" width="15" height="18" uuid="cbbd7c3a-2b8c-41fe-a547-91c513110822"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_reference_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="0" width="15" height="18" uuid="2473122f-ce92-4e14-bdf3-62df6d44219b"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_remark}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="0" width="15" height="18" uuid="d3de14ec-5997-4cc6-9bf0-9b27fac0bdcd"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_m_transaction_type_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="0" width="15" height="18" uuid="c7705c1b-f40b-416d-91b0-046bedf4b126"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="0" width="15" height="18" uuid="5a583f63-d91c-400f-8376-b416794d72ba"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_create_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="15" height="18" uuid="af1df41f-829d-4092-b547-3ca38acc6775"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_create_user}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="0" width="15" height="18" uuid="d51fee6f-6d60-4917-b85a-32724ed8340c"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_update_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="0" width="15" height="18" uuid="898d9ff6-f394-44ac-afac-feef53c9010c"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_update_user}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="0" width="15" height="18" uuid="6939cf4a-e2e0-4b7b-9ba7-fef5ab19e68f"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_close_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="15" height="18" uuid="9f06f1cb-11b2-40d9-8a27-6e92cfb3377f"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_close_user}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="195" y="0" width="15" height="18" uuid="dcc7e10f-8241-4fcf-954c-f2eb490f0355"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_bpartner_c_bpartner_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="0" width="15" height="18" uuid="b887bbaa-9966-439b-a8b7-ab6f95cae328"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_bpartner_partner_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="225" y="0" width="15" height="18" uuid="42d01790-4005-4c35-8740-d61512b5d90b"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_bpartner_partner_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="0" width="15" height="18" uuid="68122fba-29e6-4c26-a7f9-de7f8aa4d571"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_bpartner_partner_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="255" y="0" width="15" height="18" uuid="241327dc-cd32-4c79-8f70-a0de2370357f"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_line_c_order_line_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="0" width="15" height="18" uuid="87f8f006-86e9-49fb-b26b-e6d670858d87"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_line_c_order_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="285" y="0" width="15" height="18" uuid="211af86f-0859-4152-90f2-3ecb6057a889"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_line_schedule_delivery_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="15" height="18" uuid="5de55c2b-65b7-409e-87ce-fb2a07ecc15c"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_line_m_product_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="315" y="0" width="15" height="18" uuid="cf9540b3-f883-4039-bc09-b64fbc011308"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_line_order_quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="15" height="18" uuid="53a0cab7-2cfa-4372-832a-8c031fecec3e"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_line_reserve_quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="0" width="15" height="18" uuid="42598cbb-923f-406a-ac01-3ec3a9124e1e"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_line_delivered_quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="0" width="15" height="18" uuid="4ea372e4-5b19-4b76-8e0b-a1a184988a35"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_line_return_quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="0" width="15" height="18" uuid="e97aab3b-4e93-49e0-b3ac-4cf51be2b22e"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_line_item_description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="0" width="15" height="18" uuid="24bb5681-cf8d-42d1-9637-54614b86ba9c"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_line_item_number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="405" y="0" width="15" height="18" uuid="8a679a8d-dff9-4ab5-874f-914f4118c401"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{c_order_line_line_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="15" height="18" uuid="c99340ef-f6d8-40c6-b285-0d1c5e88f3d1"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{m_product_m_product_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="435" y="0" width="15" height="18" uuid="68bee940-bf8b-4232-8330-7886957a99d5"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{m_product_product_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="15" height="18" uuid="a74be829-aee4-4121-9a66-6b95cbedd38f"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{m_product_spec}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="465" y="0" width="15" height="18" uuid="a6009895-4d13-4726-a39f-51947c57fc44"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{m_product_thickness}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="15" height="18" uuid="4cb198ab-517f-48f8-893c-05482729739d"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{m_product_weight}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="495" y="0" width="15" height="18" uuid="8680b432-f02c-4400-9fba-ef43698e1280"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{m_product_length}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="510" y="0" width="15" height="18" uuid="8d79f1c4-36ca-46a7-bc89-1e550002ff56"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{m_product_product_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="525" y="0" width="15" height="18" uuid="94178008-782f-4475-b15e-7d1ee1729bb9"/>
+				<box topPadding="4" leftPadding="4" rightPadding="4">
+					<bottomPen lineWidth="1.0" lineColor="#CCCCCC"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{m_product_description}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="3" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="435" y="0" width="100" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="8eaa13f7-532e-4791-b5c7-5c4f727f41f6"/>
+				<box topPadding="3" rightPadding="3">
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER} + " dari"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="435" height="16" backcolor="#CCCCCC" uuid="ea22ec93-d0d4-4b5c-9dc9-7effe5baf126"/>
+				<box topPadding="3" leftPadding="4"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RE-CUTTING APPLICATION - PT. SRIREJEKI PERDANA STEEL]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="535" y="0" width="20" height="16" forecolor="#FFFFFF" backcolor="#000000" uuid="8c15ab3f-96ff-4d60-89ee-30ab9a5ecb61"/>
+				<box topPadding="3">
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
